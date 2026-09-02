@@ -1,39 +1,9 @@
-name: Build The Dodgeulator APK
+name: Test
 
-"on":
-  workflow_dispatch:
+on: workflow_dispatch
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Extract Android project
-        run: |
-          unzip -o The_Dodgeulator_Android_Project.zip
-          mv The_Dodgeulator_Android/* .
-          mv The_Dodgeulator_Android/.[!.]* . 2>/dev/null || true
-          rm -rf The_Dodgeulator_Android
-
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
-
-      - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.10'
-
-      - name: Build APK
-        run: gradle assembleDebug
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: The-Dodgeulator-APK
-          path: app/build/outputs/apk/debug/app-debug.apk
+      - run: echo "Workflow works!"
